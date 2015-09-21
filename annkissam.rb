@@ -1,18 +1,16 @@
 # Word counter. Take in a string and return the unique word count 
-require 'pry'
-string1 = "Hello, world!"
-string2 = "To be or not to be"
 
 def word_count(string)
+  string.gsub!(/\W+/, ' ')
   check_array = string.downcase.split(' ')
-  array = []
-  new_array = []
-  count = 1
-  check_array.map do |word|
-    if !array.include?(word)
-      array << [word, count]
-    else
-      array.index(word)    
-  end
+  word_count_hash = Hash.new
 
+  check_array.each do |word|
+    unless word_count_hash.include?(word)
+      word_count_hash[word] = 1
+    else
+      word_count_hash[word] += 1
+    end
+  end
+  word_count_hash 
 end
